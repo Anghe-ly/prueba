@@ -1,0 +1,40 @@
+
+.container{
+    background-color: pink;
+    display: grid
+;
+    height: 50%;
+    width: 50%;
+    margin: 10px;
+    padding: 15px;
+    border: 2px black solid;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.formGroup{
+
+    display: grid;
+    justify-content: center;
+}
+
+.inputNombre{
+    display: flex;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 5px;
+}
+
+.inputBtn{
+    display: flex;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 5px;
+}
+

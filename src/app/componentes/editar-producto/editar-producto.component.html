@@ -1,0 +1,19 @@
+<div class="container">
+    <h3>Editar producto</h3>
+
+  <div class="formGroup">
+    <form [formGroup]="editarForm" class="form-group" (ngSubmit)="onSubmit()">
+        <p>Vas a editar el producto con el ID: {{prod.idproducto}} </p>
+
+        <div class="inputNombre">
+            <label for="nombre">Nombre </label>
+            <input type="text" name="nombre" formControlName="nombre">
+        </div>
+         <small class="form-text text-muted">Introduce el nuevo nombre del producto</small>
+ 
+         <div class="inputBtn">
+             <button type="submit" class="btn" [disabled]="editarForm.invalid">Editar</button>
+         </div>
+     </form>
+  </div>
+</div>

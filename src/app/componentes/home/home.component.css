@@ -1,0 +1,18 @@
+.container{
+    background-color: pink;
+    display: grid;
+    width: 100%;
+}
+
+.listaProducto{
+    display: grid;
+    justify-items: center;
+}
+
+.carousel-inner{
+display: grid;
+}
+
+#carouselExampleControls{
+    width: 40%;
+}

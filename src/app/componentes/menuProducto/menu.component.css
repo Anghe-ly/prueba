@@ -1,0 +1,37 @@
+.menuBackground{
+    width: 100%;
+    height: auto;
+    background-color: rgb(254, 152, 169);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-content: center;
+}
+
+.logo{
+    background-color: pink;
+    width: 100%;
+    height: 100px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    justify-content: space-between;
+    background-color: pink;
+}
+
+#barraBusqueda{
+    display: flex;
+}
+
+#logoIMG{
+    height: 25px;
+}
+
+#logginBtn{
+    width: 80%;
+}
