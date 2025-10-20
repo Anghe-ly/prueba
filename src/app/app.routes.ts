@@ -7,6 +7,7 @@ import { EditarProductoComponent } from './componentes/editar-producto/editar-pr
 import { UsuarioComponent } from './componentes/usuario/usuario.component';
 import { InicioSesionComponent } from './componentes/inicio-sesion/inicio-sesion.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { AuthGuards } from './auth/auth.guard';
 
 export const routes: Routes = [
 
@@ -24,19 +25,23 @@ export const routes: Routes = [
        }, 
        {
         path: "editar/:id",
-        component: EditarProductoComponent
+        component: EditarProductoComponent,
+        canActivate: [AuthGuards]
        },
        {
         path: "registro",
-        component: UsuarioComponent
+        component: UsuarioComponent,
+         canActivate: [AuthGuards]
        }, 
        {
         path: "inicio-sesion",
         component: InicioSesionComponent
+       },
+       {
+        path: "carrito",
+        loadComponent: () => import('./componentes/carrito/carrito.component').then(c => c.CarritoComponent),
+         canActivate: [AuthGuards]
        }
-       
-       
-       /* loadComponent: ()=>
-            import('./servicios/http.service').then((c)=> c.HttpService)*/
+    
    
 ];

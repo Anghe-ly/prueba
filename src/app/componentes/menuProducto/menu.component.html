@@ -17,15 +17,24 @@
         <a class="nav-link" href="./producto">Añadir producto</a>
       </li>
       
+       <li class="nav-item">
+        <a class="nav-link" href="./carrito">Carrito</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" id="barraBusqueda">
       <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="button">
         <img src="/img/buscar.png" alt="logo" id="logoIMG">
       </button>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logginBtn" >
-        <a class="nav-link" href="inicio-sesion">Iniciar Sesion</a>
-      </button>
+
+      <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logginBtn" *ngIf="!usuarioService.logeado">
+  <a class="nav-link" href="/inicio-sesion">Iniciar Sesion</a>
+</button>
+<button class="btn btn-outline-danger my-2 my-sm-0" type="button" id="logoutBtn" *ngIf="usuarioService.logeado" (click)="cerrarSesion()">
+  Cerrar Sesion
+</button>
+
+
     </form>
   </div>
 </nav>

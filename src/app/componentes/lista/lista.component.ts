@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../../interfaces/producto';
 import { ProductoService } from '../../servicios/producto.service';
 import { Router } from '@angular/router';
+import { CarritoService } from '../../servicios/carrito.service';
 
 @Component({
   selector: 'app-lista',
@@ -21,7 +22,9 @@ export class ListaComponent implements OnInit {
 
     constructor(
       private servicio: ProductoService,
-      private router: Router
+      private router: Router,
+      private servicioCarrito: CarritoService
+      
       
     ) {}
 
@@ -43,6 +46,11 @@ export class ListaComponent implements OnInit {
   redirigirEditar(idproducto:number){
     this.router.navigate(["editar",idproducto])
     
+  }
+
+  agregarCarrito(){
+
+    this.router.navigate(["carrito"])
   }
 
 }

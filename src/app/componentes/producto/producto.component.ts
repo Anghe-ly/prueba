@@ -47,7 +47,6 @@ validarFormulario: FormGroup = new FormGroup({
   onSubmit(){
 
   if(this.validarFormulario.valid){
-      
   this.nuevoProducto = this.validarFormulario.value
   this.servicio.anadirProducto(this.nuevoProducto).subscribe(dato => {
     console.log(dato)

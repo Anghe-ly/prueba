@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
- private URL: string = "http://localhost:8080/api/"
+ private URL: string = "http://localhost:8080/public/"
+
+ logeado: boolean = false;
 
   constructor(
     private http : HttpClient
@@ -20,6 +22,17 @@ export class UsuarioService {
 
   obtenerPorID(id: number): Observable<any> {
     return this.http.get(`${this.URL}usuario/${id}`);
+  }
+
+  //servicio para iniciar sesion 
+  iniciarSesion(username: string, password: string): Observable<any> {
+
+        this.logeado = true; //actualiza el estado de logueo
+
+    return this.http.post('http://localhost:8080/login/auth', { username, password }, {
+      withCredentials: true
+    });
+
   }
 
  }

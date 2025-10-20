@@ -66,21 +66,12 @@ export class UsuarioComponent {
   }
 
 
-  
-
 mostrarAlerta(){
   this.alerta = true 
 
-  setTimeout(() => {
+setTimeout(() => {
     this.alerta = false
   }, 3000);
 }
-
-  // mostrarUsuario(id:number):void{
-  //   this.servicio.obtenerPorID(id).subscribe({
-  //     next: () =>
-  //       console.log(this.nuevoUser.user)
-  //   })
-  // }
 
 }

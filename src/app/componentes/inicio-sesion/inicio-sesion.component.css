@@ -31,6 +31,15 @@
     padding: 5px;
 }
 
+.inputPass{
+    display: flex;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 5px;
+}
+
 .inputBtn{
     display: flex;
 

@@ -1,7 +1,39 @@
 <div class="container">
+   @if(!mostrarRegistro){
     <h3>Iniciar sesión</h3>
 
-    <form class="form-group">
+    <form class="form-group"
+    (ngSubmit)="onSubmitLogin()"
+    [formGroup]="formularioLogin">
+       <div class="inputCorreo">
+        <label for="correo">
+            Usuario
+        </label>
+        <input type="text" name="user" formControlName="user">
+       </div>
+
+       <div class="inputPass">
+        <label for="pass">
+            Contraseña
+        </label>
+        <input type="password" name="pass" formControlName="pass">
+       </div>
+
+        <div class="inputBtn">
+            <button type="submit" class="btn" [disabled]="formularioLogin.invalid">Acceder</button>
+        </div>
+            <p><a class="link-opacity-75-hover" (click)="cambiarForm()">Registrarme</a></p>
+
+            <p><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p> 
+            <!-- AÑADIR EL INICIO DE SESION DE GOOGLE LUEGO Y REDIRIGIR A LA PAGINA PRINCIPAL -->
+    </form>
+   }@else {
+
+    <h3>Registro de usuario</h3>
+
+    <form class="form-group"
+    [formGroup]="formularioRegistro"
+    (ngSubmit)="onSubmitRegistro()">
        <div class="inputUser">
         <label for="user">
             Nombre de usuario
@@ -16,14 +48,32 @@
         <input type="email" name="correo" formControlName="correo">
        </div>
 
+       <div class="inputPass">
+        <label for="pass">
+            Contraseña
+        </label>
+        <input type="password" name="pass" formControlName="pass">
+       </div>
+
         <div class="inputBtn">
-            <button type="submit" class="btn">Acceder</button>
+            <button type="submit" class="btn" [disabled]="formularioRegistro.invalid">Crear cuenta</button>
         </div>
-            <p><a class="link-opacity-75-hover" href="registro">Registrarme</a></p>
+            <p><a class="link-opacity-75-hover" (click)="cambiarForm()"> Ya tengo una cuenta</a></p>
 
             <p><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p>
-
-
-       
     </form>
+   }
+
+      @if(alerta){
+                <div class="alert alert-primary" role="alert">
+                    Usuario creado correctamente!
+                </div>
+            }
+
+    @if(logeado){
+                 <div class="alert alert-success" role="alert">
+                      Sesión iniciada correctamente!
+                 </div>
+                }
+
 </div>
