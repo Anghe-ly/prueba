@@ -61,6 +61,8 @@ export class UsuarioComponent {
         next: ()=> {
           this.mostrarAlerta()
         }
+
+        
       })
     }
   }
