@@ -19,8 +19,6 @@ export class ProductoService {
   mostrarProductos(): Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.URL}prueba`)}
     
-    //.pipe(tap(productos => console.log("Productos obtenidos:", productos)) FORMA DE VER EN ARRAY LOS DATOS QUE LLEGAN DEL BACK 
-
 
 
   //metodo que añade un nuevo producto a la bbdd
@@ -41,7 +39,5 @@ export class ProductoService {
   
     return this.http.get(`${this.URL}producto/${id}`);
   }
-  // obtenerPorID(id:number):Observable<any>{
-  //   return this.http.get(`${this.URL}producto/${id}`)
-  // }
+
 }

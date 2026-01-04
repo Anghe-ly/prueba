@@ -17,7 +17,8 @@ export class EditarProductoComponent implements OnInit {
 
    prod : Producto = {
     nombre: "",
-    idproducto: 0
+    idProducto: 0,
+    precio: 0
   }
 
  // productoID!: number
@@ -33,13 +34,13 @@ export class EditarProductoComponent implements OnInit {
 
 ngOnInit(): void{
   this.ruta.params.subscribe(params => {
-  this.prod.idproducto = +params['id']
+  this.prod.idProducto = +params['id']
 
 
-  if(isNaN(this.prod.idproducto) || this.prod.idproducto <= 0){
+  if(isNaN(this.prod.idProducto) || this.prod.idProducto <= 0){
   console.log("El ID no es un numero" + params['id']) 
 }
-  this.obtenerProducto(this.prod.idproducto)
+  this.obtenerProducto(this.prod.idProducto)
   })
 } 
 
@@ -71,11 +72,11 @@ if(this.editarForm.valid){
 
   this.prod.nombre = this.editarForm.value.nombre
 
-  if(isNaN(this.prod.idproducto)){
+  if(isNaN(this.prod.idProducto)){
     console.log("el id no es un numero en el SUBMIT")
   }
 
-  this.servicio.editarProducto(this.prod.idproducto, this.editarForm.value).subscribe({
+  this.servicio.editarProducto(this.prod.idProducto, this.editarForm.value).subscribe({
     next: (respuesta)=>{
       console.log("Respuesta de la API: " + respuesta)
       this.router.navigate(["lista"])

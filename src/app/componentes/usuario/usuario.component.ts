@@ -3,6 +3,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../../interfaces/usuario';
+import { AuthService } from '../../servicios/auth.service';
 
 
 @Component({
@@ -17,7 +18,6 @@ export class UsuarioComponent {
   alerta: boolean = false
 
   nuevoUser: Usuario = {
-    idUsuario: 0,
     user: "",
     correo: "", 
     password: "",
@@ -26,7 +26,8 @@ export class UsuarioComponent {
 
   constructor(
     private router: Router,    
-    private servicio: UsuarioService
+    private servicio: UsuarioService,
+    private authServicio: AuthService
   ){}
 
 
@@ -58,12 +59,19 @@ export class UsuarioComponent {
       this.nuevoUser.password = this.validarFormulario.value.password
 
       this.servicio.anadirUser(this.nuevoUser).subscribe({
-        next: ()=> {
+        next: (res: any)=> {
           this.mostrarAlerta()
+             //se loguea luego de crearse el user
+      
+             if(res && res.token){
+              this.authServicio.setToken(res.token);
+             }
+             this.router.navigate(['/lista']);
         }
-
-        
       })
+
+         
+
     }
   }
 

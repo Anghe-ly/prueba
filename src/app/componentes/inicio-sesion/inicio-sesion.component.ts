@@ -20,7 +20,6 @@ logeado: boolean = false;
 alerta: boolean = false;
 
 user: Usuario = {
-  idUsuario: 0,
   user: "",
   correo: "", 
   password: "",
@@ -78,7 +77,7 @@ onSubmitLogin() {
       next: (datos) => {
         console.log("Inicio de sesión exitoso");
         this.logeado = true;
-        this.router.navigate(['/home']);
+        this.router.navigate([""]);
       },
       error: (error) => {
         console.error("Error al iniciar sesión", error);

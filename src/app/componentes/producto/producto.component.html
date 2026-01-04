@@ -9,6 +9,11 @@
         <small class="form-text text-muted">Introduce el nombre del producto a añadir</small>  
         
   
+        <label for="nombre">PRECIO: </label>
+        <input type="number" name="precio" formControlName="precio">
+        <small class="form-text text-muted">Introduce el precio del producto a añadir</small>  
+        
+  
         <div class="botonContainer">       
             <button type="submit" class="btn" [disabled]="validarFormulario.invalid">crear</button>
         </div>

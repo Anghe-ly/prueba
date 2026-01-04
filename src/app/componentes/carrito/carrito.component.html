@@ -1,76 +1,54 @@
 
-
-<!-- Carrito lateral emergente básico con Bootstrap -->
- <!--
-<div class="offcanvas offcanvas-end show" tabindex="-1" id="carritoOffcanvas" aria-labelledby="carritoLabel" style="visibility: visible; width: 350px;">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="carritoLabel">Carrito</h5>
-    <button type="button" class="btn-close text-reset" aria-label="Cerrar"></button>
-  </div>
-
-  <div class="offcanvas-body">
-    <div *ngIf="carrito.length === 0" class="text-center text-muted">
-      <p>El carrito está vacío.</p>
-    </div>
-    <div *ngFor="let producto of carrito; let i = index" class="card mb-3">
-      <div class="card-body d-flex align-items-center">
-        <div class="flex-grow-1">
-          <h6 class="card-title mb-1">{{ producto.nombre }}</h6>
-          <p class="card-text mb-1">Precio: {{ producto.precioUnidad | currency:'EUR' }}</p>
-          <div class="input-group input-group-sm w-75">
-            <button class="btn btn-outline-secondary" type="button">-</button>
-            <input type="text" class="form-control text-center" [value]="producto.cantidad" readonly>
-            <button class="btn btn-outline-secondary" type="button">+</button>
-          </div>
-        </div>
-        <button class="btn btn-danger btn-sm ms-2">
-          <i class="bi bi-trash"></i> 
-          
-        
-          
-        </button>
-      </div>
-    </div>
-    <div *ngIf="carrito.length > 0" class="mt-4">
-      <button class="btn btn-success w-100">Finalizar compra</button>
-    </div>
-  </div>
-</div>
--->
-
 <!-- Carrito con modal -->
-
 <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="carritoModalLabel">Carrito</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" (click)="cerrarCarrito()"></button>
       </div>
       <div class="modal-body">    
         
-    <div class="offcanvas-body">
-    <div *ngIf="carrito.productos.length=== 0" class="text-center text-muted">
+    <div class="offcanvas-body" >
+
+ @if(carrito.productos.length === 0){
+    <div class="text-center text-muted">
       <p>El carrito está vacío.</p>
     </div>
-    <div *ngFor="let producto of carrito.productos; let i = index" class="card mb-3">
+  }
+
+ 
+
+  @for (producto of carrito.productos; track $index) {
+    <div class="card mb-3">
       <div class="card-body d-flex align-items-center">
         <div class="flex-grow-1">
-          <h6 class="card-title mb-1">{{ producto.nombre }}</h6>
-          <p class="card-text mb-1">Precio: {{ producto.precioUnidad | currency:'EUR' }}</p>
+            <h6>{{ producto.producto?.nombre  }}</h6>
+            <p>Cantidad: {{ producto.cantidad }}</p>
+            <p>Total: {{ producto.precioTotal | currency:'EUR' }}</p>
+
           <div class="input-group input-group-sm w-75">
             <button class="btn btn-outline-secondary" type="button">-</button>
             <input type="text" class="form-control text-center" [value]="producto.cantidad" readonly>
             <button class="btn btn-outline-secondary" type="button">+</button>
           </div>
         </div>
-        <button class="btn btn-danger btn-sm ms-2">
-          <i class="bi bi-trash"></i> <!-- Bootstrap Icons -->
+        <button class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(producto.id)" title="Eliminar producto">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
         </button>
       </div>
     </div>
-    <div *ngIf="carrito.productos.length > 0" class="mt-4">
+  }
+
+
+    @if(carrito.productos.length > 0){
+    <div class="mt-4">
+
+         <h5>Total a pagar: {{ carrito.total | currency:'EUR' }}</h5>
+
+      
       <button class="btn btn-success w-100" (click)="onSubmit()" >Finalizar compra</button>
     </div>
+  }
   </div>
-</div>
+</div> 

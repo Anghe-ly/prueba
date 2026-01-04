@@ -1,7 +1,14 @@
 import { Producto } from "./producto";
 
-export interface ProductoCarrito extends Producto {
-    cantidad: number, 
-    preciototal: number,
-    precioUnidad: number
+export interface ProductoCarrito {
+    id:number,
+    carritoId:number,
+    cantidad:number,
+    precioTotal:number,
+    producto?:  {
+        idProducto:number,
+        nombre:string,
+        precio:number
+    }
+
 }

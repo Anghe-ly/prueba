@@ -1,79 +1,91 @@
-<div class="container">
-   @if(!mostrarRegistro){
-    <h3>Iniciar sesión</h3>
+<div class="contenedor container-fluid  d-flex justify-content-center align-items-center">
 
-    <form class="form-group"
-    (ngSubmit)="onSubmitLogin()"
-    [formGroup]="formularioLogin">
-       <div class="inputCorreo">
-        <label for="correo">
-            Usuario
-        </label>
-        <input type="text" name="user" formControlName="user">
-       </div>
+    <div class="inicioSesionContainer glass-card text-center p-5">
 
-       <div class="inputPass">
-        <label for="pass">
-            Contraseña
-        </label>
-        <input type="password" name="pass" formControlName="pass">
-       </div>
+        @if(!mostrarRegistro){
+        <h3>Iniciar sesión</h3>
 
-        <div class="inputBtn">
-            <button type="submit" class="btn" [disabled]="formularioLogin.invalid">Acceder</button>
+        <form class="d-flex flex-column gap-3 text-center" (ngSubmit)="onSubmitLogin()" [formGroup]="formularioLogin">
+
+            <div class= "form-floating ">
+        
+                <input type="text" class="form-control  glass-input" id="floatingInput" placeholder="Nombre de usuario" name="user" formControlName="user">
+                <label for="floatingInput">Usuario</label>
+
+            </div>
+
+            <div class= "form-floating">
+            
+                <input type="password" class="form-control  glass-input" id="floatingInput"  placeholder="Contraseña" name="pass" formControlName="pass">
+                <label for="floatingInput">Contraseña</label>
+            </div>
+
+            <div >
+                <button type="submit" class="btn btnCompra w-100" [disabled]="formularioLogin.invalid">
+
+                    Acceder
+
+                </button>
+            </div>
+            <p class="link"><a class="link-opacity-75-hover" (click)="cambiarForm()">Registrarme</a></p>
+
+            <p class="link"><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p>
+
+        </form>
+
+        }@else {
+        <h3>Registrarme</h3>
+
+        <form class="d-flex flex-column gap-3 text-center" 
+            (ngSubmit)="onSubmitRegistro()"
+            [formGroup]="formularioRegistro">
+
+            <div class= "form-floating">
+             
+                <input type="text" class="form-control  glass-input" id="floatingInput" placeholder="Nombre de usuario"  name="user" formControlName="user">
+                <label for="floatingInput">Usuario</label>
+
+            </div>
+
+            <div class= "form-floating">
+             
+                <input type="email"  class="form-control  glass-input" id="floatingInput" placeholder="Correo Electrónico" name="correo" formControlName="correo">
+                   <label for="floatingInput">Correo Electrónico</label>
+            </div>
+
+            <div class= "form-floating">
+               
+                <input type="password" class="form-control  glass-input" id="floatingInput" placeholder="Contraseña" name="pass" formControlName="pass">
+                   <label for="floatingInput">Contraseña</label>
+            </div>
+
+            <div class= "form-floating">
+                <button type="submit"  class="btn btnCompra w-100" [disabled]="formularioRegistro.invalid">
+
+                    Crear cuenta
+
+                </button>
+
+                <p class="link"><a class="link-opacity-75-hover" (click)="cambiarForm()"> Ya tengo una cuenta</a></p>
+                <p class="link"><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p>
+
+            </div>
+        </form>
+        }
+
+
+
+        @if(alerta){
+        <div class="alert alert-primary" role="alert">
+            Usuario creado correctamente!
         </div>
-            <p><a class="link-opacity-75-hover" (click)="cambiarForm()">Registrarme</a></p>
+        }
 
-            <p><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p> 
-            <!-- AÑADIR EL INICIO DE SESION DE GOOGLE LUEGO Y REDIRIGIR A LA PAGINA PRINCIPAL -->
-    </form>
-   }@else {
-
-    <h3>Registro de usuario</h3>
-
-    <form class="form-group"
-    [formGroup]="formularioRegistro"
-    (ngSubmit)="onSubmitRegistro()">
-       <div class="inputUser">
-        <label for="user">
-            Nombre de usuario
-        </label>
-        <input type="text" name="user" formControlName="user">
-       </div>
-
-       <div class="inputCorreo">
-        <label for="correo">
-            Correo
-        </label>
-        <input type="email" name="correo" formControlName="correo">
-       </div>
-
-       <div class="inputPass">
-        <label for="pass">
-            Contraseña
-        </label>
-        <input type="password" name="pass" formControlName="pass">
-       </div>
-
-        <div class="inputBtn">
-            <button type="submit" class="btn" [disabled]="formularioRegistro.invalid">Crear cuenta</button>
+        @if(logeado){
+        <div class="alert alert-success" role="alert">
+            Sesión iniciada correctamente!
         </div>
-            <p><a class="link-opacity-75-hover" (click)="cambiarForm()"> Ya tengo una cuenta</a></p>
+        }
 
-            <p><a class="link-opacity-75-hover" href="#">Acceder con mi cuenta Google</a></p>
-    </form>
-   }
-
-      @if(alerta){
-                <div class="alert alert-primary" role="alert">
-                    Usuario creado correctamente!
-                </div>
-            }
-
-    @if(logeado){
-                 <div class="alert alert-success" role="alert">
-                      Sesión iniciada correctamente!
-                 </div>
-                }
-
+    </div>
 </div>

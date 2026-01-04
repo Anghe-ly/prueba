@@ -18,7 +18,8 @@ export class ProductoComponent {
 
 nuevoProducto : Producto = {
   nombre: "",
-  idproducto: 0
+  idProducto: 0, 
+  precio: 0
 }
 
       constructor(
@@ -41,7 +42,12 @@ validarFormulario: FormGroup = new FormGroup({
   nombre: new FormControl("", [
     Validators.required,
     Validators.minLength(3)
+  ]),
+    precio: new FormControl(0, [
+    Validators.required,
+    Validators.minLength(3)
   ])
+  
 })
 
   onSubmit(){

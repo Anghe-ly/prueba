@@ -2,3 +2,14 @@ body {
     margin: 0;
     padding: 0;
 }
+
+:root {
+  --bs-primary: rgb(212, 114, 131);
+  --bs-secondary: rgb(239, 184, 192);
+  --bs-success: rgb(249, 195, 87);
+  --bs-danger: rgb(249, 195, 87);
+  --bs-warning:rgb(180, 169, 107);
+  --bs-info: rgb(212, 114, 131);
+  --bs-light:  rgb(212, 114, 131);
+  --bs-dark: rgb(180, 169, 107);
+}

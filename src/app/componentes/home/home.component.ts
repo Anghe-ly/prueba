@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ListaComponent } from '../lista/lista.component';
 import { ProductoService } from '../../servicios/producto.service';
 import { Producto } from '../../interfaces/producto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ export class HomeComponent {
   
       constructor(
         private servicio: ProductoService,
+        private router: Router, 
+        
         
       ) {}
       
@@ -27,6 +30,14 @@ export class HomeComponent {
           }
         })
       }
+
+
+        redirigirLista(){
+        this.router.navigate(["lista"])}
+
+        redirigirDetalles(idproducto:number){
+          this.router.navigate(["producto", idproducto])
+        }
 
 
 }

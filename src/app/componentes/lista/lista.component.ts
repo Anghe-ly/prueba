@@ -3,6 +3,10 @@ import { Producto } from '../../interfaces/producto';
 import { ProductoService } from '../../servicios/producto.service';
 import { Router } from '@angular/router';
 import { CarritoService } from '../../servicios/carrito.service';
+import { AuthService } from '../../servicios/auth.service';
+
+
+  
 
 @Component({
   selector: 'app-lista',
@@ -13,17 +17,14 @@ import { CarritoService } from '../../servicios/carrito.service';
 })
 export class ListaComponent implements OnInit {
 
-  producto : Producto = {
-  nombre: "", 
-  idproducto: 0
-  }
-    listaProducto: Producto[] = [] 
+  listaProducto: Producto[] = [] 
   
 
     constructor(
       private servicio: ProductoService,
       private router: Router,
-      private servicioCarrito: CarritoService
+      private servicioCarrito: CarritoService,
+      private authService: AuthService
       
       
     ) {}
@@ -48,9 +49,37 @@ export class ListaComponent implements OnInit {
     
   }
 
-  agregarCarrito(){
-
-    this.router.navigate(["carrito"])
+  redirigirDetalles(idproducto:number){
+    this.router.navigate(["producto",idproducto])
   }
 
+
+   obtenerCarrito(){
+  
+      if(this.authService.logueado()){
+       const idUsuario = this.authService.getUsuarioId()!;//por que se usa ! al final
+        this.servicioCarrito.mostrarCarrito(idUsuario).subscribe({
+          next: () =>{
+            console.log("Carrito cargado");},
+            error (error) {
+              console.log("no se ha podido obtener el carrito", error)
+            }
+        })
+      }
+    }
+
+  //metodo que añade el producto clickeado al carrito deu usuario logueado
+  agregarCarrito(producto: Producto){
+  
+
+    if(this.authService.logueado()){
+      
+
+      this.servicioCarrito.agregarProductoCarrito(producto, 1);
+
+      this.router.navigate(["carrito"]);
+    }
+
+
+  }
 }

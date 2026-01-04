@@ -1,8 +1,41 @@
-<div class="container">
-    <div class="listaProducto">
-        <h3>PRODUCTOS DISPONIBLES</h3>
+<section class="hero-section container-fluid  p-0">
 
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="row g-0 align-items-center">
+
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+       <div class="text-center">
+         <h2 class="hero-title">
+          Nueva Coleccion Verano 2025
+        </h2>
+        <button type="button" class="btn btnCompra btn-lg" (click)="redirigirLista()">
+          Ver catálogo
+        </button>
+
+       </div>
+      </div>
+
+     
+      <div class="col-md-6 hero-image-wrapper">
+        <img src="/img/Home1.png" alt="Productos" class="hero-image">
+      </div>
+
+
+    </div>
+
+</section>
+
+
+
+
+<section class="container-fluid p-0">
+ 
+  <div class="row g-0 align-items-center">
+
+    <div class="col-md-6 ">
+         <div class="text-center d-flex justify-content-center flex-column align-items-center">
+        <div class="carousel-wrapper">
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
           <div class="carousel-inner">
 
@@ -11,7 +44,7 @@
             <div class="carousel-item" [class.active] = "$index === 0">
               <img src="/img/sylusChibi.png" class="d-block w-100" alt="...">
                 <p>{{producto.nombre}}</p>
-                <button type="submit" class="btn">Ver más</button>
+                <button type="submit" class="btn btnVerMas" (click)="redirigirDetalles(producto.idProducto)">Ver más</button>
             </div>
           }
           </div>
@@ -20,14 +53,29 @@
 
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Anterior</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Siguiente</span>
           </button>
+
+        </div>
+
         </div>
         
     </div>
-</div>
 
+    </div>
+
+
+    <div class="col-md-6 text-center">
+
+      <h2 class="title">
+        Nuestros Bestsellers
+      </h2>
+      <p>Descubre nuestra nueva coleccion con más colores</p>
+    </div>
+
+  </div>
+</section>

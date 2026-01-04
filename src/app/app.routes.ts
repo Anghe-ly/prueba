@@ -8,21 +8,29 @@ import { UsuarioComponent } from './componentes/usuario/usuario.component';
 import { InicioSesionComponent } from './componentes/inicio-sesion/inicio-sesion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { AuthGuards } from './auth/auth.guard';
+import { ProductoDetallesComponent } from './componentes/producto/producto-detalles/producto-detalles.component';
+import { MainComponent } from './layout/main/main.component';
 
 export const routes: Routes = [
 
-    {path: "home",
+ { path:"",
+    component: MainComponent,
+    children: [
+      {
+        path: "",
         component: HomeComponent,
-
-    },
-    { path: "lista",
+      },
+       { path: "lista",
     component: ListaComponent,
-       }, 
-    
-       {
+       },
+        {
         path: "producto",
         component: ProductoComponent
-       }, 
+       },
+         {
+        path: "producto/:id",
+        component: ProductoDetallesComponent
+      },
        {
         path: "editar/:id",
         component: EditarProductoComponent,
@@ -42,6 +50,9 @@ export const routes: Routes = [
         loadComponent: () => import('./componentes/carrito/carrito.component').then(c => c.CarritoComponent),
          canActivate: [AuthGuards]
        }
-    
+
+    ]
+
+  }
    
 ];

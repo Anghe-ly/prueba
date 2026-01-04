@@ -1,40 +1,60 @@
-
-<div class="logo"> 
-  <h1>AQUI VA EL LOGO</h1>
+<div class="logo-header d-flex justify-content-center align-items-center py-3">
+  <img src="/img/logo.png" alt="logo" class="logo-img img-fluid">
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar busqueda navbar-expand-lg px-3">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/home">Home</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+          data-bs-target="#menuPrincipal">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- CONTENIDO DEL MENÚ -->
+  <div class="collapse navbar-collapse" id="menuPrincipal">
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item"><a class="nav-link" (click)="redirigirHome()">
+        Home
+      </a>
+    </li>
+      <li class="nav-item"><a class="nav-link" (click)="redirigirLista()">
+        Lista
+      </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/lista">Lista</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./producto">Añadir producto</a>
-      </li>
-      
-       <li class="nav-item">
-        <a class="nav-link" href="./carrito">Carrito</a>
-      </li>
+      <li class="nav-item"><a class="nav-link" (click)="redirigirProducto()">
+        Añadir producto
+      </a>
+    </li>
+      <li class="nav-item"><a class="nav-link" (click)="redirigirCarrito()" *ngIf="authService.logueado$ | async">
+        Carrito
+      </a>
+    </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" id="barraBusqueda">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="button">
-        <img src="/img/buscar.png" alt="logo" id="logoIMG">
+
+    <!-- BARRA DE BÚSQUEDA -->
+
+  <div class="search-pill">
+    <input type="text" placeholder="Buscar productos...">
+    <button>
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+
+    <!-- BOTONES DE SESIÓN -->
+    <div class="ms-3">
+      <button class="btn btn-outline-success me-2" 
+      *ngIf="!(authService.logueado$ | async)">
+        <a class="nav-link p-0" routerLink="/inicio-sesion">
+          Iniciar Sesión
+        </a>
       </button>
 
-      <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logginBtn" *ngIf="!usuarioService.logeado">
-  <a class="nav-link" href="/inicio-sesion">Iniciar Sesion</a>
-</button>
-<button class="btn btn-outline-danger my-2 my-sm-0" type="button" id="logoutBtn" *ngIf="usuarioService.logeado" (click)="cerrarSesion()">
-  Cerrar Sesion
-</button>
-
-
-    </form>
+      <button class="btn btn-outline-danger" 
+              *ngIf="authService.logueado$ | async" 
+              (click)="cerrarSesion()">
+        Cerrar Sesión
+      </button>
+    </div>
   </div>
 </nav>

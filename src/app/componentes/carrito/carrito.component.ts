@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit } from '@angular/core';
-import { ProductoCarrito } from '../../interfaces/producto-carrito';
 import { Usuario } from '../../interfaces/usuario';
 import { Carrito } from '../../interfaces/carrito';
 import { CarritoService } from '../../servicios/carrito.service';
 import { AuthService } from '../../servicios/auth.service';
+import { Producto } from '../../interfaces/producto';
 
-declare var bootstrap: any; // Importa Bootstrap JS globalmente
+declare var bootstrap: any; 
 
 @Component({
   selector: 'app-carrito',
@@ -16,43 +16,69 @@ declare var bootstrap: any; // Importa Bootstrap JS globalmente
   styleUrl: './carrito.component.css'
 })
 export class CarritoComponent implements AfterViewInit {
+
+
   carrito: Carrito = {
-    id: 0,
     total: 0,
     cantidadTotal: 0,   
     fechaCompra: new Date(),
     usuario: {
-      idUsuario: 0,
       user: "",
       correo: "", 
       password: ""
     },
     productos: []
-  } 
+  };
 
-  
   constructor(
     private servicio: CarritoService,
-   // private auth: AuthService
+    private auth: AuthService,
+    
   ) {}
+
+
+  ngOnInit(): void {
+  this.servicio.carrito$.subscribe((carritoData: Carrito) => {
+     this.carrito = carritoData;
+   });
+  }
+
 
   //logica para el MODAL de boostrap
   ngAfterViewInit() {
-    const modalElement = document.getElementById('carritoModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
+    const carritoModal = document.getElementById('carritoModal');
+    if (carritoModal && this.auth.logueado()) {
+      const idUsuario = this.auth.getUsuarioId();
+      this.servicio.cargarCarrito(idUsuario!);
+      const modal = new bootstrap.Modal(carritoModal);
       modal.show();
+ }
+
+  }
+
+
+  eliminarProducto(idProducto: number){
+    if(this.auth.logueado()){
+      const idUsuario = this.auth.getUsuarioId()!;
+
+      this.servicio.eliminarProductoCarrito(idProducto, idUsuario)
+      .subscribe({
+        next: ()=> {
+          console.log("Producto eliminado del carrito");
+          this.servicio.cargarCarrito(idUsuario);
+        },
+        error:()=>{
+          console.log("Error al eliminar el producto del carrito");
+        }
+      })
     }
-
-    this.cargarCarrito();
   }
 
-  cargarCarrito(){
-    let idUsuario = this.carrito.usuario.idUsuario
-    this.servicio.mostrarCarrito(idUsuario).subscribe((data: any) => {
-      this.carrito = data;
-    })
+  cerrarCarrito(){
+  window.history.back();
+
   }
+
 
   onSubmit(){
     alert("Compra realizada con éxito");
