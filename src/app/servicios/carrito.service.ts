@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap, throwError } from 'rxjs';
 import { Carrito } from '../interfaces/carrito';
 import { environment } from '../../environments/environment.development';
 import { Producto } from '../interfaces/producto';
@@ -41,40 +41,34 @@ export class CarritoService {
   }
 
 
-    mostrarCarrito(idUsuario: number):Observable<object>{
-      return this.http.get(`${environment.apiUrl}/private/${idUsuario}/carrito`)
+    mostrarCarrito(idUsuario: number):Observable<Carrito>{
+      return this.http.get<Carrito>(`${environment.apiUrl}/private/${idUsuario}/carrito`)
     }
 
-    agregarProductoCarrito(producto: Producto, cantidad: number): void {
+  agregarProductoCarrito(producto: Producto, cantidad: number): Observable<Carrito> {
 
-      if(this.auth.logueado()){
-        const idUsuario = this.auth.getUsuarioId();
-
-        if(idUsuario === null || isNaN(idUsuario)){
-
-           console.log("El id del usuario no es valido")
-            return;
-        }
-
-        this.agregarProducto(idUsuario, producto.idProducto, cantidad)
-        .subscribe({
-          next: ()=>{
-            console.log("Producto agregado al carrito")
-            this.cargarCarrito(idUsuario);
-          },
-          error:()=>{
-            console.log("Error al agregar el producto al carrito")
-          }
-        })
-
-      }else{
-        console.log("Usuario no logueado. No se puede agregar al carrito.")
-        return;
-      }
+ 
+    
+    if(!this.auth.logueado()){
+      return throwError(() => new Error("Usuario no loguea"));
     }
 
-     agregarProducto(idUsuario:number, idProducto: number, cantidad:number):Observable<object>{
-        return this.http.post(`${environment.apiUrl}/private/${idUsuario}/agregar`, 
+    const idUsuario = this.auth.getUsuarioId();
+    if(idUsuario === null || isNaN(idUsuario)){
+
+      return throwError(() => new Error("ID de usuario no válido"));
+    }
+
+      return this.agregarProducto(idUsuario, producto.idProducto, cantidad).pipe(
+      switchMap(() => this.mostrarCarrito(idUsuario)),
+      tap(carrito => this.carritoSubject.next(this.carrito = carrito))
+    );
+  
+  }
+
+     
+  agregarProducto(idUsuario:number, idProducto: number, cantidad:number):Observable<object>{
+        return this.http.post<Carrito>(`${environment.apiUrl}/private/${idUsuario}/agregar`, 
         {},
         {params: {
            idProducto, cantidad
@@ -86,7 +80,7 @@ export class CarritoService {
     eliminarProductoCarrito(idProducto:number, idUsuario:number): Observable<object>{
 
     
-      return this.http.delete(`${environment.apiUrl}/private/${idUsuario}/eliminar`,
+      return this.http.delete<Carrito>(`${environment.apiUrl}/private/${idUsuario}/eliminar`,
       {params: {idProducto}
       });
     }

@@ -75,9 +75,10 @@ export class ListaComponent implements OnInit {
     if(this.authService.logueado()){
       
 
-      this.servicioCarrito.agregarProductoCarrito(producto, 1);
-
-      this.router.navigate(["carrito"]);
+      this.servicioCarrito.agregarProductoCarrito(producto, 1)
+      .subscribe(() => {
+        this.router.navigate(["carrito"]);
+      });
     }
 
 

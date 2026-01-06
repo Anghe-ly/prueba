@@ -38,6 +38,10 @@ export class CarritoComponent implements AfterViewInit {
 
 
   ngOnInit(): void {
+ if (this.auth.logueado()) {
+      const idUsuario = this.auth.getUsuarioId();
+      this.servicio.cargarCarrito(idUsuario!);
+ }
   this.servicio.carrito$.subscribe((carritoData: Carrito) => {
      this.carrito = carritoData;
    });
@@ -47,14 +51,12 @@ export class CarritoComponent implements AfterViewInit {
   //logica para el MODAL de boostrap
   ngAfterViewInit() {
     const carritoModal = document.getElementById('carritoModal');
-    if (carritoModal && this.auth.logueado()) {
-      const idUsuario = this.auth.getUsuarioId();
-      this.servicio.cargarCarrito(idUsuario!);
+   
       const modal = new bootstrap.Modal(carritoModal);
       modal.show();
  }
 
-  }
+  
 
 
   eliminarProducto(idProducto: number){
