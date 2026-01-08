@@ -79,6 +79,8 @@ export class ListaComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(["carrito"]);
       });
+    }else{
+      this.router.navigate(["inicio-sesion"]);
     }
 
 

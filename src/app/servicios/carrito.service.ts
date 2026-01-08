@@ -59,6 +59,7 @@ export class CarritoService {
       return throwError(() => new Error("ID de usuario no válido"));
     }
 
+  
       return this.agregarProducto(idUsuario, producto.idProducto, cantidad).pipe(
       switchMap(() => this.mostrarCarrito(idUsuario)),
       tap(carrito => this.carritoSubject.next(this.carrito = carrito))

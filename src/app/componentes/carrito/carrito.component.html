@@ -4,7 +4,9 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="carritoModalLabel">Carrito</h5>
+        <h5 class="modal-title fw-bold" id="carritoModalLabel">
+          Carrito
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" (click)="cerrarCarrito()"></button>
       </div>
       <div class="modal-body">    
@@ -28,9 +30,9 @@
             <p>Total: {{ producto.precioTotal | currency:'EUR' }}</p>
 
           <div class="input-group input-group-sm w-75">
-            <button class="btn btn-outline-secondary" type="button">-</button>
+            <button class="btn btnMenos" type="button" (click)="actualizarCantidad(producto, -1)">-</button>
             <input type="text" class="form-control text-center" [value]="producto.cantidad" readonly>
-            <button class="btn btn-outline-secondary" type="button">+</button>
+            <button class="btn btnMas" type="button" (click)="actualizarCantidad(producto, +1)">+</button>
           </div>
         </div>
         <button class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(producto.id)" title="Eliminar producto">
@@ -44,10 +46,10 @@
     @if(carrito.productos.length > 0){
     <div class="mt-4">
 
-         <h5>Total a pagar: {{ carrito.total | currency:'EUR' }}</h5>
+         <h5 class="fw-bold">Total a pagar: {{ carrito.total | currency:'EUR' }}</h5>
 
       
-      <button class="btn btn-success w-100" (click)="onSubmit()" >Finalizar compra</button>
+      <button class="btn btnFinalizarCompra w-100" (click)="onSubmit()" >Finalizar compra</button>
     </div>
   }
   </div>

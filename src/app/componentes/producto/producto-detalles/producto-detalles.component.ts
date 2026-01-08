@@ -1,6 +1,7 @@
 declare var bootstrap: any;
 
 import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { Producto } from '../../../interfaces/producto';
 import { ProductoService } from '../../../servicios/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { CarritoService } from '../../../servicios/carrito.service';
 @Component({
   selector: 'app-producto-detalles',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './producto-detalles.component.html',
   styleUrl: './producto-detalles.component.css'
 })
@@ -18,7 +19,7 @@ export class ProductoDetallesComponent {
 
 
 
-imagenesProducto = [
+imagenesProducto:String[] = [
 "/img/labial1.png",
 "/img/labial2.png",
 "/img/labial3.png"
@@ -49,30 +50,24 @@ const id = Number(this.route.snapshot.paramMap.get('id'));
   })
   }
 
-   obtenerCarrito(){
-  
-      if(this.auth.logueado()){
-       const idUsuario = this.auth.getUsuarioId()!;//por que se usa ! al final
-        this.carrito.mostrarCarrito(idUsuario).subscribe({
-          next: () =>{
-            console.log("Carrito cargado");},
-            error (error) {
-              console.log("no se ha podido obtener el carrito", error)
-            }
-        })
-      }
-    }
- 
-
-
 
     agregarCarrito(producto: Producto){
   
-      this.carrito.agregarProductoCarrito(producto, 1);
-      this.alertaProducto();
+    if(this.auth.logueado()){
+      
+
+      this.carrito.agregarProductoCarrito(producto, 1)
+      .subscribe(() => {
+        this.router.navigate(["carrito"]);
+      });
+    }else{
+      this.router.navigate(["inicio-sesion"]);
+    }
+
 
 }
 
+/*
 alertaProducto(){
   const toastTrigger = document.getElementById('botonAgregarCarrito')
   const toastProducto = document.getElementById('toastProducto')
@@ -84,7 +79,7 @@ alertaProducto(){
       toastBootstrap.show();
     })
   }
-}
+}*/
 
 }
 

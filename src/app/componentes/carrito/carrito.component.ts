@@ -5,6 +5,7 @@ import { Carrito } from '../../interfaces/carrito';
 import { CarritoService } from '../../servicios/carrito.service';
 import { AuthService } from '../../servicios/auth.service';
 import { Producto } from '../../interfaces/producto';
+import { ProductoCarrito } from '../../interfaces/producto-carrito';
 
 declare var bootstrap: any; 
 
@@ -29,6 +30,8 @@ export class CarritoComponent implements AfterViewInit {
     },
     productos: []
   };
+
+  valorActual: number = 1;
 
   constructor(
     private servicio: CarritoService,
@@ -84,5 +87,25 @@ export class CarritoComponent implements AfterViewInit {
 
   onSubmit(){
     alert("Compra realizada con éxito");
+  }
+
+
+  actualizarCantidad(producto: ProductoCarrito, cantidad:number){
+
+    const idUsuario = this.auth.getUsuarioId();
+    const nuevaCantidad = producto.cantidad + cantidad;
+
+    if(idUsuario === null || nuevaCantidad < 0){
+      return;
+    }
+
+    producto.cantidad = nuevaCantidad;
+
+    this.servicio.agregarProductoCarrito(producto.producto!, nuevaCantidad).subscribe({
+      error: ()=>{
+        console.log("Error al actualizar la cantidad del producto en el carrito");
+      }
+    })
+
   }
 }
