@@ -9,8 +9,19 @@ import { HomeComponent } from './componentes/home/home.component';
 import { AuthGuards } from './auth/auth.guard';
 import { ProductoDetallesComponent } from './componentes/producto/producto-detalles/producto-detalles.component';
 import { MainComponent } from './layout/main/main.component';
+import { AdminGuard } from './auth/admin-guard.guard';
+import { ZonaAdminComponent } from './admin/zona-admin/zona-admin.component';
 
 export const routes: Routes = [
+
+
+  {
+  path: 'admin',
+  canActivate: [AdminGuard],
+  loadComponent: () =>
+    import('./admin/zona-admin/zona-admin.component')
+      .then(c => c.ZonaAdminComponent)
+},
 
  { path:"",
     component: MainComponent,
@@ -43,10 +54,12 @@ export const routes: Routes = [
         path: "carrito",
         loadComponent: () => import('./componentes/carrito/carrito.component').then(c => c.CarritoComponent),
          canActivate: [AuthGuards]
-       }
+       },
+    
 
     ]
 
   }
+
    
 ];

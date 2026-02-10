@@ -73,19 +73,24 @@
         </form>
         }
 
-
-
-        @if(alerta){
-        <div class="alert alert-primary" role="alert">
-            Usuario creado correctamente!
-        </div>
-        }
-
-        @if(logeado){
-        <div class="alert alert-success" role="alert">
-            Sesión iniciada correctamente!
-        </div>
-        }
-
     </div>
+
+   
 </div>
+
+<div class="toastContainer">
+    @if (toastVisible == true) {
+    <div class="toast show align-items-center"  [ngClass]="toastClase" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+        {{toastMensaje}}
+    </div>
+    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" (click)="toastVisible = false"></button>
+  </div>
+</div>
+}
+</div>
+
+
+
+    

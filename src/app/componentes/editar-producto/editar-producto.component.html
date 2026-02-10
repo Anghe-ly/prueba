@@ -1,4 +1,4 @@
-<div class="container">
+<div class="containerEditar">
     <h3>Editar producto</h3>
 
   <div class="formGroup">
@@ -10,6 +10,13 @@
             <input type="text" name="nombre" formControlName="nombre">
         </div>
          <small class="form-text text-muted">Introduce el nuevo nombre del producto</small>
+ 
+         
+        <div class="inputPrecio">
+            <label for="precio">Precio </label>
+            <input type="number" name="precio" formControlName="precio">
+        </div>
+         <small class="form-text text-muted">Introduce el nuevo precio del producto</small>
  
          <div class="inputBtn">
              <button type="submit" class="btn" [disabled]="editarForm.invalid">Editar</button>

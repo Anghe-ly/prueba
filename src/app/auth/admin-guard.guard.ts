@@ -6,7 +6,7 @@ import { Router, CanActivate } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuards implements CanActivate {
+export class AdminGuard implements CanActivate {
 
     constructor(
         private servicio: AuthService, 
@@ -14,12 +14,19 @@ export class AuthGuards implements CanActivate {
     ){}
 
     canActivate(): boolean{
-        if(this.servicio.getToken()){
-            return true;
-        }else {
-            this.router.navigate(['/inicio-sesion']);
-            return false;
-        }
+    
+    if (!this.servicio.getToken()) {
+      this.router.navigate(['/inicio-sesion']);
+      return false;
     }
+
+    if (!this.servicio.isAdmin()) {
+      this.router.navigate(['/']);
+      return false;
+    }
+
+    return true;
+  }
+    
 
 }

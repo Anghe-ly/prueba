@@ -27,7 +27,7 @@ login(username: string, password: string): Observable<{token: string}> {
     .pipe(
       tap((response: { token: string }) => {
         
-        localStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.token);
         this.logueadoSubject.next(true);
       })
     );
@@ -35,20 +35,20 @@ login(username: string, password: string): Observable<{token: string}> {
 
 //metodo de Logout que elimina el token y luego te lleva al login de nuevo
 logout(): void{
-  localStorage.removeItem('token');
+  sessionStorage.removeItem('token');
   this.logueadoSubject.next(false);
   this.router.navigate(['/inicio-sesion']);
 }
 
-//metodo que añade el token al localStorage
+//metodo que añade el token al sessionStorage
 setToken(token: string):void{
- localStorage.setItem('token', token);
+ sessionStorage.setItem('token', token);
 }
 
 
-//metodo que obtiene el token almacendo en el localStorage
+//metodo que obtiene el token almacendo en el sessionStorage
 getToken(): string | null {
-  return localStorage.getItem('token');
+  return sessionStorage.getItem('token');
 }
 
 
@@ -61,6 +61,7 @@ logueado():boolean{
     return false;
   }
 }
+
 
  //metodo que decodifica el payLoad del token
   private decodePayload(): any | null {
@@ -90,6 +91,27 @@ logueado():boolean{
       }
     }
   }
+
+  //metodo que usa el decod para extraer el rol del usuario
+getRole(): string | null {
+  const payload = this.decodePayload();
+  if(!payload){
+    return null;
+
+  }
+  return payload.rol || null;
+}
+
+
+isAdmin():boolean{
+  const role = this.getRole();
+  if(role === 'ADMIN' || role === 'ROLE_ADMIN' || role === 'admin' || role === 'ROLE_ADMIN'){
+    return true;
+}else{
+  return false;
+}
+}
+
 
   //metodo que usa el decodificador para obtener el id del usuario
   getUsuarioId(): number | null {

@@ -8,7 +8,7 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
   providedIn: 'root'
 })
 export class ProductoService {
- private URL: string = "http://localhost:8080/api/"
+ private URL: string = "http://localhost:8080/public/"
 
   constructor(
     private http : HttpClient

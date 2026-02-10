@@ -4,20 +4,26 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../../interfaces/usuario';
 import { AuthService } from '../../servicios/auth.service';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-inicio-sesion',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.css'
 })
 export class InicioSesionComponent implements OnInit {
+
+
 //variables
 
 mostrarRegistro: boolean = false;
-logeado: boolean = false;
-alerta: boolean = false;
+toastVisible: boolean = false;
+toastMensaje: string = "";
+toastClase: string = 'bg-success';
 
 user: Usuario = {
   user: "",
@@ -48,6 +54,9 @@ formularioLogin:FormGroup = new FormGroup({
 
  }
 
+
+
+
  ngOnInit(): void {
    //creacion de usuario y subirlo a la BBDD 
 
@@ -74,14 +83,15 @@ onSubmitLogin() {
 
     this.auth.login(this.user.user, this.user.password).subscribe({
 
-      next: (datos) => {
-        console.log("Inicio de sesión exitoso");
-        this.logeado = true;
-        this.router.navigate([""]);
+      next: () => {
+        this.mostrarToast("Inicio de sesión exitoso", "success");
+
+         setTimeout(() => {
+          this.router.navigate(['']);
+        }, 2000);
       },
-      error: (error) => {
-        console.error("Error al iniciar sesión", error);
-        this.mostrarAlerta();
+      error: () => {
+        this.mostrarToast("Credenciales erróneas", "danger")
       }
     }
     )
@@ -98,16 +108,24 @@ onSubmitRegistro(){
     this.user.password = this.formularioRegistro.value.pass
 
     this.servicio.anadirUser(this.user).subscribe({
-      next: (datos)=> {
-        console.log("Usuario creado con exito")
+      next: ()=> {
+       
+        this.mostrarToast("Usuario creado con éxito", "success")
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 2000);
       },
-      error: (error)=> {
-        console.log(error)
+      error: ()=>{
+              this.mostrarToast("No se ha podido crear el usuario", "danger")
+
       }
+     
+      
     }) //fin del suscribe
 
   } //fin del if
  }
+
 
 cambiarForm(){
   this.mostrarRegistro = !this.mostrarRegistro
@@ -115,14 +133,14 @@ cambiarForm(){
  }
  
 
- //arreglar alert mas tarde
- 
- 
-mostrarAlerta(){
-  this.alerta = true;
+ mostrarToast(mensaje:string, tipo: 'success' | 'danger'){
+  this.toastMensaje = mensaje;
+  this.toastClase = `bg-${tipo}`;
+  this.toastVisible = true;
 
   setTimeout(() => {
-    this.alerta = false;
-  }, 3000);
-  }
+    this.toastVisible = false;
+  }, 2000);
+ }
+
 }
