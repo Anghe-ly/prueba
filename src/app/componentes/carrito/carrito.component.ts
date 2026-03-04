@@ -7,6 +7,8 @@ import { AuthService } from '../../servicios/auth.service';
 import { Producto } from '../../interfaces/producto';
 import { ProductoCarrito } from '../../interfaces/producto-carrito';
 
+
+
 declare var bootstrap: any; 
 
 @Component({

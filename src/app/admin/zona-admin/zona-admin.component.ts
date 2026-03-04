@@ -10,14 +10,15 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { CarritoService } from '../../servicios/carrito.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from '../../componentes/menuProducto/menu.component';
 
 @Component({
   selector: 'app-zona-admin',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
-  templateUrl: './zona-admin.component.html',
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterOutlet, MenuComponent],
+  templateUrl:'./zona-admin.component.html',
   styleUrl: './zona-admin.component.css',
 })
 export class ZonaAdminComponent {
@@ -68,36 +69,7 @@ export class ZonaAdminComponent {
     })
   }
 
-  //metodos para EDITAR producto
-  //validacion del formulario
-  editarForm: FormGroup = new FormGroup({
-    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    precio: new FormControl('', [Validators.required]),
-  });
-
-  editarProducto(id: number) {
-    this.mostrarFormEditar = true;
-  }
-
-  onSubmitEditar() {
-    if (this.editarForm.valid) {
-      this.editarForm.patchValue({
-        nombre: this.producto.nombre,
-        precio: this.producto.precio,
-      });
-      this.servicioProducto
-        .editarProducto(this.producto.idProducto, this.editarForm.value)
-        .subscribe({
-          next: () => {
-            console.log('Producto editado con exito');
-          },
-          error: () => {
-            console.error('Error al editar el producto');
-          },
-        });
-    }
-  }
-
+ 
   cerrarFormEditar() {
     this.mostrarFormEditar = false;
   }
@@ -120,5 +92,14 @@ export class ZonaAdminComponent {
 
   redirigirDetalles(id:number){
     this.router.navigate(["producto", this.producto.idProducto])
+  }
+
+    redirigirEditar(id:number){
+    this.router.navigate(["/admin/editar",id])
+    
+  }
+
+  redirigirCrear(){
+    this.router.navigate(["/admin/crear"])
   }
 }

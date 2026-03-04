@@ -20,9 +20,10 @@
         src="/img/sylusChibi.png"
         alt="sylus">
         <h5>{{ productos.nombre }}</h5>
-        <p>{{ productos.precio }} €</p>
+        <p>{{ productos.precio | currency:'EUR'}} </p>
 
     </div>
+    
         <button type="button" class="btn btnCompra btn-outline-primary" (click)="agregarCarrito(productos)">AÑADIR AL CARRITO</button>
 
         </div>

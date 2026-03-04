@@ -1,0 +1,43 @@
+<div class="container mt-5 container-fluid  d-flex justify-content-center align-items-center">
+   
+    <div class="glass-card text-center p-5 position-relative">
+
+   <button type="button" 
+                class="btn-close position-absolute top-0 end-0 m-3" 
+                aria-label="Cerrar" 
+                (click)="cerrarForm()">
+            </button>
+
+        <h3 class="fw-bold">Crear un nuevo producto</h3>
+
+    <form [formGroup]="crearForm" 
+    class= "form-group d-flex flex-column gap-2 text-center" 
+    (ngSubmit)="onSubmit()">
+    
+       <div class="inputNombre d-flex flex-column">
+            <label for="nombre">NOMBRE: </label>
+            <input type="text" name="nombre" formControlName="nombre">
+            <small class="form-text text-muted">Introduce el nombre del producto a añadir</small>  
+            
+       </div>
+  
+     
+       <div class="inputPrecio d-flex flex-column">
+            <label for="precio">PRECIO: </label>
+            <input type="number" name="precio" formControlName="precio">
+            <small class="form-text text-muted">Introduce el precio del producto a añadir</small>  
+       </div>
+  
+        <div class="botonContainer">       
+            <button type="submit"
+             class="btn" 
+             [disabled]="crearForm.invalid">
+                crear
+            </button>
+        </div>
+
+    </form>
+
+    </div>
+</div>
+

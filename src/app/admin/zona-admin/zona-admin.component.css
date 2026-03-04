@@ -1,0 +1,9 @@
+.containerTitle{
+    background-color: rgb(212, 114, 131);
+    color: white;
+    font-size: 1.25rem;
+    height: auto;
+    padding: 20px;
+    letter-spacing: 0.5rem;
+    text-align: center;
+}

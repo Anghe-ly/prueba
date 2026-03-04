@@ -1,0 +1,63 @@
+
+<!-- EDITAR PRODUCTO FORM -->
+     <div class="containerEditar mt-5 container-fluid  d-flex justify-content-center align-items-center">
+
+        <div class="glass-card text-center p-5 position-relative">
+
+  
+            <button type="button" 
+                class="btn-close position-absolute top-0 end-0 m-3" 
+                aria-label="Cerrar" 
+                (click)="cerrarFormEditar()">
+            </button>
+
+                <h3 class="fw-bold">Editar producto</h3>
+
+
+  <div class="formGroup">
+    <form 
+    [formGroup]="editarForm" 
+    class="form-group d-flex flex-column gap-2 text-center" 
+    (ngSubmit)="onSubmit()">
+
+        <div class="inputNombre d-flex flex-column">
+
+            <label for="nombre">
+                Nombre 
+            </label>
+            <input type="text" 
+            name="nombre" 
+            formControlName="nombre">
+
+        </div>
+         <small class="form-text text-muted">Introduce el nuevo nombre del producto</small>
+ 
+         
+        <div class="inputPrecio d-flex flex-column">
+
+            <label for="precio">
+                Precio
+            </label>
+            <input type="number" 
+            name="precio" 
+            formControlName="precio">
+
+        </div>
+         <small class="form-text text-muted">Introduce el nuevo precio del producto</small>
+ 
+         <div class="inputBtn">
+
+             <button type="submit" 
+             class="btn w-100" 
+             [disabled]="editarForm.invalid">
+                Editar
+            </button>
+
+         </div>
+     </form>
+  </div>
+
+    </div>
+</div>
+
+

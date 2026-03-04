@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+  font-family: 'Nunito', sans-serif;
+
 }
 
 :root {
@@ -13,3 +15,9 @@ body {
   --bs-light:  rgb(212, 114, 131);
   --bs-dark: rgb(180, 169, 107);
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+}
+

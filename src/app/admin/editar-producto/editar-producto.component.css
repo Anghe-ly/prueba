@@ -1,0 +1,25 @@
+
+.containerEditar {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+}
+
+.glass-card {
+    display: flex;
+    background: rgb(212, 114, 131);
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 20px 50px rgba(212, 114, 131, 0.886);
+    flex-direction: column;
+
+
+}
+
+button {
+   background-color: rgb(255, 255, 255);
+  color: rgb(212, 114, 131);
+  font-size: 15px;
+  border-radius: 30px;
+  font-size: 18px;
+}

@@ -18,13 +18,9 @@
       </a>
     </li>
       <li class="nav-item"><a class="nav-link" (click)="redirigirLista()">
-        Ver Todos
+        Catálogo
       </a>
       </li>
-      <li class="nav-item"><a class="nav-link" (click)="redirigirProducto()">
-        Añadir producto
-      </a>
-    </li>
       <li class="nav-item"><a class="nav-link" (click)="redirigirCarrito()" *ngIf="authService.logueado$ | async">
         Carrito
       </a>

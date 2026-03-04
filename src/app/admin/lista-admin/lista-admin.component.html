@@ -1,0 +1,50 @@
+
+<!-- LISTA CONTAINER -->
+
+
+<div class="containerLista">
+
+    <h3> Catalogo de productos</h3>
+    <div class="gridLista">
+        
+    @for (productos of listaProducto; track $index){
+       
+        <div class="contenedorProducto">
+
+    <div>
+        <img
+        src="/img/sylusChibi.png"
+        alt="sylus">
+        <h5>{{ productos.nombre }}</h5>
+        <p>{{ productos.precio }} €</p>
+
+    </div>
+
+    <div class="containerBotones">
+        
+            <button class="btn" 
+            type="button" 
+            (click)="eliminarProducto(productos.idProducto)">
+                Eliminar
+            </button>
+            <button class="btn" 
+            type="button" 
+            (click)="redirigirEditar(productos.idProducto)">
+                Editar
+            </button>
+    </div>
+    </div>
+
+    }
+    </div>
+</div>
+
+
+
+<!--  Boton crear producto -->
+
+<div class="containerCrear">
+    <button class="btnCrear" (click)="redirigirCrear()">
+        CREAR NUEVO PRODUCTO
+    </button>
+</div>

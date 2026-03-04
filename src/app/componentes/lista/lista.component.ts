@@ -4,6 +4,7 @@ import { ProductoService } from '../../servicios/producto.service';
 import { Router } from '@angular/router';
 import { CarritoService } from '../../servicios/carrito.service';
 import { AuthService } from '../../servicios/auth.service';
+import { CommonModule } from '@angular/common';
 
 
   
@@ -11,7 +12,7 @@ import { AuthService } from '../../servicios/auth.service';
 @Component({
   selector: 'app-lista',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './lista.component.html',
   styleUrl:'./lista.component.css'
 })
