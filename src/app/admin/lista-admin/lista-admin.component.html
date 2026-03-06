@@ -1,10 +1,22 @@
+<div class="containerTitle">
+        <h3 class="text-center"> Catalogo de productos</h3>
+
+</div>
+
+<!--  Boton crear producto -->
+
+<div class="containerCrear">
+    <button class="btn btnCrear" (click)="redirigirCrear()">
+        Crear nuevo producto
+    </button>
+</div>
+
 
 <!-- LISTA CONTAINER -->
 
 
 <div class="containerLista">
 
-    <h3> Catalogo de productos</h3>
     <div class="gridLista">
         
     @for (productos of listaProducto; track $index){
@@ -39,12 +51,3 @@
     </div>
 </div>
 
-
-
-<!--  Boton crear producto -->
-
-<div class="containerCrear">
-    <button class="btnCrear" (click)="redirigirCrear()">
-        CREAR NUEVO PRODUCTO
-    </button>
-</div>

@@ -39,16 +39,6 @@ export class ListaComponent implements OnInit {
 
   }
 
-  eliminarProducto(id:number){
-    this.servicio.borrarProducto(id).subscribe(datos=> {
-      this.router.navigate(["lista"])
-    })
-  }
-
-  redirigirEditar(idproducto:number){
-    this.router.navigate(["editar",idproducto])
-    
-  }
 
   redirigirDetalles(idproducto:number){
     this.router.navigate(["producto",idproducto])

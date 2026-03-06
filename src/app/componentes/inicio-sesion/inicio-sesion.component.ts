@@ -132,6 +132,9 @@ cambiarForm(){
 
  }
  
+ cerrarForm(){
+  this.router.navigate(['']);
+ }
 
  mostrarToast(mensaje:string, tipo: 'success' | 'danger'){
   this.toastMensaje = mensaje;

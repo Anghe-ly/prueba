@@ -2,11 +2,11 @@ declare var bootstrap: any;
 
 import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { Producto } from '../../../interfaces/producto';
-import { ProductoService } from '../../../servicios/producto.service';
+import { Producto } from '../../interfaces/producto';
+import { ProductoService } from '../../servicios/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../servicios/auth.service';
-import { CarritoService } from '../../../servicios/carrito.service';
+import { AuthService } from '../../servicios/auth.service';
+import { CarritoService } from '../../servicios/carrito.service';
 
 @Component({
   selector: 'app-producto-detalles',

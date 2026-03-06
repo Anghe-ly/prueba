@@ -1,4 +1,4 @@
-<div class="container mt-5 container-fluid  d-flex justify-content-center align-items-center">
+<div class="container mt-5 container-fluid  d-flex justify-content-center align-items-center mb-5">
    
     <div class="glass-card text-center p-5 position-relative">
 
@@ -15,7 +15,7 @@
     (ngSubmit)="onSubmit()">
     
        <div class="inputNombre d-flex flex-column">
-            <label for="nombre">NOMBRE: </label>
+            <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" formControlName="nombre">
             <small class="form-text text-muted">Introduce el nombre del producto a añadir</small>  
             
@@ -23,14 +23,14 @@
   
      
        <div class="inputPrecio d-flex flex-column">
-            <label for="precio">PRECIO: </label>
+            <label for="precio">Precio: </label>
             <input type="number" name="precio" formControlName="precio">
             <small class="form-text text-muted">Introduce el precio del producto a añadir</small>  
        </div>
   
         <div class="botonContainer">       
             <button type="submit"
-             class="btn" 
+             class="btn btnSubmit w-100" 
              [disabled]="crearForm.invalid">
                 crear
             </button>

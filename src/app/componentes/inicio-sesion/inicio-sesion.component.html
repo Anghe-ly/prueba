@@ -3,7 +3,9 @@
     <div class="inicioSesionContainer glass-card text-center p-5">
 
         @if(!mostrarRegistro){
-        <h3>Iniciar sesión</h3>
+
+            
+       <h3>Iniciar sesión</h3>
 
         <form class="d-flex flex-column gap-3 text-center" (ngSubmit)="onSubmitLogin()" [formGroup]="formularioLogin">
 
@@ -34,6 +36,8 @@
         </form>
 
         }@else {
+
+            
         <h3>Registrarme</h3>
 
         <form class="d-flex flex-column gap-3 text-center" 

@@ -39,6 +39,14 @@
 
     <!-- BOTONES DE SESIÓN -->
     <div class="ms-3">
+
+      @if(authService.isAdmin()){
+        <button class="btn btnLogin me-2">
+        <a class="nav-link p-0" routerLink="/admin">
+          Zona Admin
+        </a>
+      </button>
+      }
     
       @if(!(authService.logueado$ | async)){
           <button class="btn btnLogin me-2">

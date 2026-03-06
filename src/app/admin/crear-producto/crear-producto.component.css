@@ -1,9 +1,8 @@
 
 .container{
    width: 100%;
-  max-width: 550px;
+  max-width: 400px;
   height: auto;
-   display: flex;
     background: rgb(212, 114, 131);
     border-radius: 20px;
     color: white;
@@ -16,4 +15,12 @@
 
     display: grid;
     justify-content: center;
+}
+
+.btnSubmit {
+   background-color: rgb(255, 255, 255);
+  color: rgb(212, 114, 131);
+  font-size: 15px;
+  border-radius: 30px;
+  font-size: 18px;
 }

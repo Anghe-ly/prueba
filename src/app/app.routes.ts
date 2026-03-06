@@ -2,15 +2,13 @@ import { Routes } from '@angular/router';
 import { MenuComponent } from './componentes/menuProducto/menu.component';
 import { Component } from '@angular/core';
 import { ListaComponent } from './componentes/lista/lista.component';
-import { ProductoComponent } from './componentes/producto/producto.component';
 import { InicioSesionComponent } from './componentes/inicio-sesion/inicio-sesion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { AuthGuards } from './auth/auth.guard';
-import { ProductoDetallesComponent } from './componentes/producto/producto-detalles/producto-detalles.component';
+import { ProductoDetallesComponent } from './componentes/producto-detalles/producto-detalles.component';
 import { MainComponent } from './layout/main/main.component';
 import { AdminGuard } from './auth/admin-guard.guard';
 import { ZonaAdminComponent } from './admin/zona-admin/zona-admin.component';
-import { EditarProductoComponent } from './admin/editar-producto/editar-producto.component';
 import { ListaAdminComponent } from './admin/lista-admin/lista-admin.component';
 
 export const routes: Routes = [
@@ -50,10 +48,6 @@ export const routes: Routes = [
       },
        { path: "lista",
     component: ListaComponent,
-       },
-        {
-        path: "producto",
-        component: ProductoComponent
        },
          {
         path: "producto/:id",

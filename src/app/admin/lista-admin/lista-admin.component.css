@@ -24,13 +24,18 @@ border-radius: 30px;
   color: white;
 }
 
-
 .btnCrear{
+  max-width: 250px;
   background-color: rgb(212, 114, 131);
   color: white;
-   font-size: 20px;
+  font-size: 20px;
 border-radius: 30px;
   border: 2px solid rgb(255, 255, 255);
+}
+.btnCrear:hover{
+  background-color: white;
+  color: rgb(212, 114, 131);
+  border: 2px solid rgb(212, 114, 131);
 }
 
 /*CONTENEDORES*/
@@ -46,6 +51,14 @@ border-radius: 30px;
     margin: 15px 50px;
 }
 
+.containerTitle{
+    color: rgb(212, 114, 131);
+    font-size: 1.25rem;
+    height: auto;
+    padding: 20px;
+    letter-spacing: 0.5rem;
+    text-align: center;
+}
 
 .containerBotones{
     display: flex;
