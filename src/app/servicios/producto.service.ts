@@ -31,10 +31,23 @@ productos$ = this.productosSubject.asObservable();
     
 
 
-  //metodo que añade un nuevo producto a la bbdd
-  anadirProducto(Producto:Producto): Observable<object>{
-    return this.http.post(`${this.URL}api/admin/producto`, Producto)
-  }
+
+  //metodo para añadir producto con imagen
+anadirProducto(producto:Producto, file:File):Observable<any>{
+
+  const formData = new FormData();
+
+  formData.append("producto", new Blob([JSON.stringify(producto)],
+  {type: "application/json"}
+));
+
+formData.append("file", file);
+
+return this.http.post(`${this.URL}api/admin/producto`, formData);
+
+
+}
+
 
   borrarProducto(id: number):Observable<object>{
 

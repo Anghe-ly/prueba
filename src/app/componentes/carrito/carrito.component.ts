@@ -6,6 +6,7 @@ import { CarritoService } from '../../servicios/carrito.service';
 import { AuthService } from '../../servicios/auth.service';
 import { Producto } from '../../interfaces/producto';
 import { ProductoCarrito } from '../../interfaces/producto-carrito';
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,13 @@ declare var bootstrap: any;
 })
 export class CarritoComponent implements AfterViewInit {
 
+//variables para el toast
+toastVisible: boolean = false;
+toastMensaje: string = "";
+toastClase: string = 'bg-success';
 
+
+//variables del carrito
   carrito: Carrito = {
     total: 0,
     cantidadTotal: 0,   
@@ -38,6 +45,7 @@ export class CarritoComponent implements AfterViewInit {
   constructor(
     private servicio: CarritoService,
     private auth: AuthService,
+    private router: Router
     
   ) {}
 
@@ -71,11 +79,10 @@ export class CarritoComponent implements AfterViewInit {
       this.servicio.eliminarProductoCarrito(idProducto, idUsuario)
       .subscribe({
         next: ()=> {
-          console.log("Producto eliminado del carrito");
           this.servicio.cargarCarrito(idUsuario);
         },
         error:()=>{
-          console.log("Error al eliminar el producto del carrito");
+          this.mostrarToast("Error al eliminar el producto del carrito", "danger");
         }
       })
     }
@@ -88,7 +95,11 @@ export class CarritoComponent implements AfterViewInit {
 
 
   onSubmit(){
-    alert("Compra realizada con éxito");
+    this.mostrarToast("Compra realizada con éxito", "success")
+    
+    setTimeout(() => {
+        this.router.navigate(["/"])
+    }, 1500);;
   }
 
 
@@ -105,9 +116,21 @@ export class CarritoComponent implements AfterViewInit {
 
     this.servicio.agregarProductoCarrito(producto.producto!, nuevaCantidad).subscribe({
       error: ()=>{
-        console.log("Error al actualizar la cantidad del producto en el carrito");
+        this.mostrarToast("Error al actualizar la cantidad del producto en el carrito", "danger");
       }
     })
 
   }
+
+  //toast
+   mostrarToast(mensaje:string, tipo: 'success' | 'danger'){
+  this.toastMensaje = mensaje;
+  this.toastClase = `bg-${tipo}`;
+  this.toastVisible = true;
+
+  setTimeout(() => {
+    this.toastVisible = false;
+  }, 2000);
+ }
+
 }

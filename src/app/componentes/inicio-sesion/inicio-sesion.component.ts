@@ -88,7 +88,7 @@ onSubmitLogin() {
 
          setTimeout(() => {
           this.router.navigate(['']);
-        }, 2000);
+        }, 1500);
       },
       error: () => {
         this.mostrarToast("Credenciales erróneas", "danger")

@@ -54,3 +54,18 @@
   }
   </div>
 </div> 
+
+
+
+<div class="toastContainer  position-fixed bottom-0 end-0 p-3">
+    @if (toastVisible == true) {
+    <div class="toast show align-items-center"  [ngClass]="toastClase" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+        {{toastMensaje}}
+    </div>
+    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" (click)="toastVisible = false"></button>
+  </div>
+</div>
+}
+</div>

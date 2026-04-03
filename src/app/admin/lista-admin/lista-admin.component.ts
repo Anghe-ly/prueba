@@ -56,7 +56,7 @@ export class ListaAdminComponent {
     eliminarProducto(id: number) {
        this.servicioProducto.borrarProducto(id).subscribe(datos=> {
         this.servicioProducto.cargarProductos();
-        this.router.navigate(["lista"])
+        this.router.navigate(["/admin"])
       })
     }
 

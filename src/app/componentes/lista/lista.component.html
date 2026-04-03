@@ -7,14 +7,18 @@
         <div class="contenedorProducto">
                 <div (click)="redirigirDetalles(productos.idProducto)">
         <img
-        src="/img/sylusChibi.png"
+        src="/img/catalogo.png"
         alt="sylus">
         <h5>{{ productos.nombre }}</h5>
         <p>{{ productos.precio | currency:'EUR'}} </p>
 
                 </div>
     
-        <button type="button" class="btn btnCompra btn-outline-primary" (click)="agregarCarrito(productos)">AÑADIR AL CARRITO</button>
+        <button type="button"
+         class="btn btnCompra btn-outline-primary"
+          (click)="agregarCarrito(productos)">
+          AÑADIR AL CARRITO
+        </button>
 
         </div>
 

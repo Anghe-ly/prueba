@@ -3,16 +3,22 @@ import { Route, Router } from '@angular/router';
 import { ProductoService } from '../../servicios/producto.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Producto } from '../../interfaces/producto';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-crear-producto',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './crear-producto.component.html',
   styleUrl: './crear-producto.component.css'
 })
 export class CrearProductoComponent {
+
+//variables para el toast
+toastVisible: boolean = false;
+toastMensaje: string = "";
+toastClase: string = 'bg-success';
 
 
   nuevoProducto : Producto = {
@@ -44,12 +50,16 @@ export class CrearProductoComponent {
       this.nuevoProducto = this.crearForm.value
       this.servicio.anadirProducto(this.nuevoProducto).subscribe({
         next: ()=>{
-          console.log("Producto creado con exito")
+          this.mostrarToast("Producto creado con éxito", "success");
           this.servicio.cargarProductos();
+
+              setTimeout(() => {
           this.router.navigate(["/admin"])
+          }, 1500);
+
         },
         error:()=>{
-          console.log("Error al crear el producto")
+          this.mostrarToast("Error al crear el producto", "danger");
         }
       })
     }
@@ -59,5 +69,16 @@ export class CrearProductoComponent {
       this.router.navigate(["/admin"])
 
   }
+
+  //toast
+   mostrarToast(mensaje:string, tipo: 'success' | 'danger'){
+  this.toastMensaje = mensaje;
+  this.toastClase = `bg-${tipo}`;
+  this.toastVisible = true;
+
+  setTimeout(() => {
+    this.toastVisible = false;
+  }, 2000);
+ }
 
 }

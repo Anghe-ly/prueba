@@ -1,11 +1,11 @@
-.logo-header {
-  background-color: #FAFAFA; 
+.logo-header{
+height: 20vh; width: 100%;
 }
 
 .logo-img {
-  max-height: 120px;     
+  max-height: 200px;     
   width: auto;
-  object-fit: contain;
+  margin-top: 10px;
 }
 
 .busqueda{

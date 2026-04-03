@@ -42,7 +42,7 @@
             @for (producto of productos; track $index) {
 
             <div class="carousel-item" [class.active] = "$index === 0">
-              <img src="/img/sylusChibi.png" class="d-block w-100" alt="...">
+              <img src="/img/catalogo.png" class="d-block w-100" alt="...">
                 <p>{{producto.nombre}}</p>
                 <button type="submit" class="btn btnVerMas" (click)="redirigirDetalles(producto.idProducto)">Ver más</button>
             </div>

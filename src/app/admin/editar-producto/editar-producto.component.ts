@@ -5,18 +5,22 @@ import { AuthService } from '../../servicios/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-editar-producto',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './editar-producto.component.html',
   styleUrl: './editar-producto.component.css'
 })
 export class EditarProductoComponent implements OnInit {
 
-//añadir toast de alertas luego
+//variables para el toast 
+toastVisible: boolean = false;
+toastMensaje: string = "";
+toastClase: string = 'bg-success';
 
 producto: Producto = {
   nombre: "",
@@ -71,7 +75,7 @@ this.servicio.obtenerPorID(id).subscribe({
     this.editarForm.patchValue(producto)
   },
   error: (error)=>{
-    console.log("error al cargar el producto")
+    this.mostrarToast("Error al cargar el producto", "danger")
   }
 })
 
@@ -84,22 +88,36 @@ onSubmit(){
 
     this.servicio.editarProducto(this.producto.idProducto, this.editarForm.value).subscribe({
       next: ()=>{
-        console.log("producto editado")
+        this.mostrarToast("Producto editado con éxito", "success");
         this.servicio.cargarProductos();
       },
       error: (error)=>{
-        console.log("error al editar el producto ", error)
+        this.mostrarToast("Error al editar el producto", "danger")
       }
     })
   }
 
-  this.router.navigate(["/admin"])
+  setTimeout(() => {
+      this.router.navigate(["/admin"])
+  }, 1500);
 }
 
 cerrarFormEditar(){
   this.router.navigate(["/admin"])
 
 }
+
+
+  //toast
+   mostrarToast(mensaje:string, tipo: 'success' | 'danger'){
+  this.toastMensaje = mensaje;
+  this.toastClase = `bg-${tipo}`;
+  this.toastVisible = true;
+
+  setTimeout(() => {
+    this.toastVisible = false;
+  }, 2000);
+ }
 
 
 }
