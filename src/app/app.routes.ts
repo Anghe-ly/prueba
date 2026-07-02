@@ -39,6 +39,22 @@ export const routes: Routes = [
       ]
 },
 
+ {
+  path: "dashboard",
+  canActivate: [AuthGuards],
+  loadComponent: ()=> 
+    import("./user/zona-user/zona-user.component")
+  .then(c => c.ZonaUserComponent),
+
+    children:[
+      {
+        path:"",
+        loadComponent: ()=> import("./user/compras/compras.component")
+        .then(c=> c.ComprasComponent)
+      }
+    ]
+ },
+
  { path:"",
     component: MainComponent,
     children: [

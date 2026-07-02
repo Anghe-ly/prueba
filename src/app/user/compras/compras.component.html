@@ -1,0 +1,62 @@
+<div class="container py-4" style="max-width: 900px;">
+    
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Mis Pedidos</h2>
+    </div>
+
+    @if(listaCompra.length === 0){
+        <div class="text-center text-muted mt-5">
+            <p class="fs-5">No has realizado ninguna compra aún.</p>
+        </div>
+    }@else {
+
+        @for (compra of listaCompra; track compra.id) {
+            <div class="card mb-4 shadow-sm w-100 border-light-subtle">
+                
+                <div class="card-header bg-light d-flex justify-content-between align-items-center py-3 border-bottom border-light-subtle">
+                    <div class="text-uppercase text-muted small fw-bold">
+                        Orden <span class="text-dark fs-6 ms-1">#{{compra.id}}</span>
+                    </div>
+                    <div class="text-muted small text-end">
+                        Pedido realizado: <br class="d-md-none">
+                        <span class="text-dark fw-medium ms-1">{{compra.fechaCompra | date:'dd/MM/yyyy'}}</span>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        
+                        <div class="col-md-9 border-end-md pe-md-4">
+                            
+                            <div class="mb-3">
+                                @for (producto of compra.productos; track producto.idProducto){
+                                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light-subtle">
+                                        <div class="fw-medium text-dark">{{producto.nombre}}</div>
+                                        <div class="text-secondary">{{producto.precio}}€</div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="d-flex justify-content-between pt-2">
+                                <span class="fw-bold text-dark fs-5">Total del pedido</span>
+                                <span class="fw-bold text-success fs-5">{{compra.total}}€</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 d-flex flex-column justify-content-center mt-4 mt-md-0 ps-md-4">
+                            <button class="btn btn-outline-danger w-100 fw-bold shadow-sm" (click)="eliminarCompra(compra.id)">
+                                Cancelar Pedido
+                            </button>
+                            <small class="text-muted text-center mt-2" style="font-size: 0.75rem;">
+                                Eliminará la orden permanentemente
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+
+</div>

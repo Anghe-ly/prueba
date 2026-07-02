@@ -1,0 +1,11 @@
+.containerCompra {
+    background-color: white;
+    border-radius: 20px;
+    height: auto;
+    width: 100%;
+    max-width: 400px; /* <-- Aumentamos de 300 a 400px para darles espacio para separarse */
+    /* display: grid; <-- ¡ELIMINA ESTA LÍNEA! */
+    margin: 10px;
+    padding: 15px; /* Un poco de aire general a la tarjeta */
+    box-shadow: 0 4px 25px rgba(212, 114, 130, 0.772);
+}

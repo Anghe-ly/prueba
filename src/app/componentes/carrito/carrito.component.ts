@@ -7,6 +7,7 @@ import { AuthService } from '../../servicios/auth.service';
 import { Producto } from '../../interfaces/producto';
 import { ProductoCarrito } from '../../interfaces/producto-carrito';
 import { Router } from '@angular/router';
+import { CompraService } from '../../servicios/compra.service';
 
 
 
@@ -45,7 +46,8 @@ toastClase: string = 'bg-success';
   constructor(
     private servicio: CarritoService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private compraServicio: CompraService
     
   ) {}
 
@@ -95,11 +97,27 @@ toastClase: string = 'bg-success';
 
 
   onSubmit(){
-    this.mostrarToast("Compra realizada con éxito", "success")
-    
-    setTimeout(() => {
-        this.router.navigate(["/"])
-    }, 1500);;
+   
+    const idUsuario = this.auth.getUsuarioId();
+
+    this.compraServicio.crearCompra(idUsuario!).subscribe({
+      next: () =>{
+      this.mostrarToast("Se ha realizado la compra con exito", "success")
+     
+      setTimeout(() => {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('carritoModal'));
+          if (modal) modal.hide();
+
+         this.router.navigate(["/dashboard"])
+      }, 2000);
+      },
+
+      error:() =>{
+        this.mostrarToast("Error al hacer la compra", "danger");
+      }
+
+    })
+  
   }
 
 
