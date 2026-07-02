@@ -32,6 +32,7 @@ export class ListaAdminComponent {
       nombre: '',
       idProducto: 0,
       precio: 0,
+      img:""
     };
   
     

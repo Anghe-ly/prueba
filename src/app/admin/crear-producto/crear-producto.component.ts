@@ -21,6 +21,8 @@ toastMensaje: string = "";
 toastClase: string = 'bg-success';
 
 
+imgProducto! : File;
+
   nuevoProducto : Producto = {
     nombre: "",
     idProducto: 0,
@@ -39,23 +41,26 @@ toastClase: string = 'bg-success';
       Validators.required,
       Validators.minLength(3)
     ]),
-    precio: new FormControl(0, [
+    precio: new FormControl(null, [
       Validators.required,
-      Validators.min(1)
+    ]),
+    
+    img: new FormControl("", [
+      Validators.required,
     ])
   })
 
   onSubmit(){
-    if(this.crearForm.valid){
+    if(this.crearForm.valid && this.imgProducto){
       this.nuevoProducto = this.crearForm.value
-      this.servicio.anadirProducto(this.nuevoProducto).subscribe({
+      this.servicio.anadirProducto(this.nuevoProducto, this.imgProducto).subscribe({
         next: ()=>{
           this.mostrarToast("Producto creado con éxito", "success");
           this.servicio.cargarProductos();
 
-              setTimeout(() => {
+          setTimeout(() => {
           this.router.navigate(["/admin"])
-          }, 1500);
+          }, 1000);
 
         },
         error:()=>{
@@ -64,6 +69,14 @@ toastClase: string = 'bg-success';
       })
     }
   }
+
+  //metodo que guarda la imagen en una constante y se lanza con el evento del html 
+    onFileSelected(event: any): void {
+      const file: File = event.target.files[0]
+      if(file){
+        this.imgProducto = file;
+      }
+    }
 
   cerrarForm(){
       this.router.navigate(["/admin"])

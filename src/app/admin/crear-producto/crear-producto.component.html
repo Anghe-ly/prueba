@@ -16,7 +16,10 @@
     
        <div class="inputNombre d-flex flex-column">
             <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre" formControlName="nombre">
+            <input type="text" 
+            name="nombre" 
+            formControlName="nombre"
+            class="form-control">
             <small class="form-text text-muted">Introduce el nombre del producto a añadir</small>  
             
        </div>
@@ -24,10 +27,23 @@
      
        <div class="inputPrecio d-flex flex-column">
             <label for="precio">Precio: </label>
-            <input type="number" name="precio" formControlName="precio">
+            <input type="number"
+            name="precio" 
+            formControlName="precio"
+            class="form-control">
             <small class="form-text text-muted">Introduce el precio del producto a añadir</small>  
        </div>
   
+     <div class="inputImg d-flex flex-column">
+            <label for="img">Imagen del producto: </label>
+            <input type="file" 
+            name="img" 
+            formControlName="img"
+            class="form-control"
+            (change)="onFileSelected($event)">
+            <small class="form-text text-muted">Sube una imagen para el producto</small>  
+       </div>
+
         <div class="botonContainer">       
             <button type="submit"
              class="btn btnSubmit w-100" 
