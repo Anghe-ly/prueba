@@ -9,3 +9,16 @@
     padding: 15px; /* Un poco de aire general a la tarjeta */
     box-shadow: 0 4px 25px rgba(212, 114, 130, 0.772);
 }
+
+.container{
+    max-width: 900px;
+}
+
+.containerTitle{
+    background-color: rgb(212, 114, 131);
+    color: white;
+    font-size: 1.25rem;
+    height: auto;
+    padding: 20px;
+    letter-spacing: 0.5rem;
+}

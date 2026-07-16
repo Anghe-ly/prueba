@@ -27,14 +27,6 @@
     </li>
     </ul>
 
-    <!-- BARRA DE BÚSQUEDA -->
-
-  <div class="search-pill">
-    <input type="text" placeholder="Buscar productos...">
-    <button>
-      <i class="bi bi-search"></i>
-    </button>
-  </div>
 
 
     <!-- BOTONES DE SESIÓN -->
@@ -48,10 +40,10 @@
       </button>
       }
     
-        @if(authService.isAdmin()){
+        @if(authService.logueado()){
         <button class="btn btnLogin me-2">
-        <a class="nav-link p-0" routerLink="/admin">
-          Zona Admin
+        <a class="nav-link p-0" routerLink="/dashboard">
+          Zona Usuario
         </a>
       </button>
       }
