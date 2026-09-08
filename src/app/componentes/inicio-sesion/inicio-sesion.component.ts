@@ -58,8 +58,6 @@ formularioLogin:FormGroup = new FormGroup({
 
 
  ngOnInit(): void {
-   //creacion de usuario y subirlo a la BBDD 
-
    //VALIDACION DE LOS FORMULARIOS
   this.formularioRegistro = this.formBuilder.group({
     user: ["", Validators.required],

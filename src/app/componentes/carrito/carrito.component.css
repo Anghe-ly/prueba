@@ -1,33 +1,35 @@
-.btnFinalizarCompra{
-      background-color: rgb(212, 114, 131);
+.btnFinalizarCompra {
+  background-color: rgb(212, 114, 131);
   color: white;
   font-size: 20px;
-border-radius: 30px;
+  border-radius: 30px;
   border: 2px solid rgb(255, 255, 255);
 
 }
 
 .btnFinalizarCompra:hover {
-    background-color: white;
+  background-color: white;
   color: rgb(212, 114, 131);
   border: 2px solid rgb(212, 114, 131);
 }
 
-.btnMenos, .btnMas{
+.btnMenos,
+.btnMas {
   background-color: white;
   color: rgb(212, 114, 131);
   border: 1px solid rgb(212, 114, 131);
   border-radius: 50%;
 }
 
-.btnMenos:active, .btnMas:active{
+.btnMenos:active,
+.btnMas:active {
   background-color: rgb(212, 114, 131);
   color: white;
 }
 
 .input-group .form-control {
-  border-top:  1px solid rgb(212, 114, 131);
-  border-bottom:  1px solid rgb(212, 114, 131);
+  border-top: 1px solid rgb(212, 114, 131);
+  border-bottom: 1px solid rgb(212, 114, 131);
   text-align: center;
   font-weight: bold;
 }

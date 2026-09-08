@@ -62,18 +62,26 @@ export class ListaComponent implements OnInit {
   //metodo que añade el producto clickeado al carrito deu usuario logueado
   agregarCarrito(producto: Producto){
   
-
     if(this.authService.logueado()){
-      
+      const idUsuario = this.authService.getUsuarioId()
+      if(idUsuario === null){
+        return;
+      }
 
-      this.servicioCarrito.agregarProductoCarrito(producto, 1)
-      .subscribe(() => {
+      this.servicioCarrito.mostrarCarrito(idUsuario).subscribe( carrito=>{
+        const productoExistente = carrito.productos.find(pc => pc.producto?.idProducto === producto.idProducto)
+        const cantidadFinal = productoExistente ? productoExistente.cantidad + 1 : 1
+      
+      this.servicioCarrito.agregarProductoCarrito(producto, cantidadFinal)
+        .subscribe(() => {
         this.router.navigate(["carrito"]);
       });
+      
+      });
+
     }else{
       this.router.navigate(["inicio-sesion"]);
     }
-
 
   }
 }

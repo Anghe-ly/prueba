@@ -49,3 +49,7 @@ eliminarCompra(idCompra:number):Observable<any>{
     return this.http.delete<any>(`${this.URL}/private/compra/eliminar/${idCompra}`)
   }
 }
+
+
+
+	

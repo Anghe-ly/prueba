@@ -1,6 +1,6 @@
 
 <!-- Carrito con modal -->
-<div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+<div class="modal fade" id="carritoModal" tabindex="-1">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -19,8 +19,7 @@
     </div>
   }
 
- 
-
+ <!-- tarjeta de productos -->
   @for (producto of carrito.productos; track $index) {
     <div class="card mb-3">
       <div class="card-body d-flex align-items-center">
@@ -35,7 +34,7 @@
             <button class="btn btnMas" type="button" (click)="actualizarCantidad(producto, +1)">+</button>
           </div>
         </div>
-        <button class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(producto.id)" title="Eliminar producto">
+        <button type="button" class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(producto.id)" title="Eliminar producto" aria-label="Eliminar producto">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
         </button>
       </div>

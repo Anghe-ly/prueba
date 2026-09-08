@@ -126,7 +126,20 @@ toastClase: string = 'bg-success';
     const idUsuario = this.auth.getUsuarioId();
     const nuevaCantidad = producto.cantidad + cantidad;
 
-    if(idUsuario === null || nuevaCantidad < 0){
+    if(idUsuario === null){
+      return;
+    }
+
+    if(nuevaCantidad <= 0){
+      this.servicio.eliminarProductoCarrito(producto.id, idUsuario).subscribe({
+        next: ()=>{
+          this.servicio.cargarCarrito(idUsuario)
+        },
+        error: ()=>{
+        this.mostrarToast("Error al borrar el carrito", "danger");
+
+        }
+      })
       return;
     }
 

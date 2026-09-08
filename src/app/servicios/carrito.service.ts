@@ -86,4 +86,8 @@ export class CarritoService {
       });
     }
 
+    eliminarCarrito(idUsuario:number):Observable<object>{
+      return this.http.delete<Carrito>(`${environment.apiUrl}/private/${idUsuario}/vaciar`)
+    }
+
 }
