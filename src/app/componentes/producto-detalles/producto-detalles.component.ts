@@ -19,16 +19,11 @@ export class ProductoDetallesComponent {
 
 
 
-imagenesProducto:String[] = [
-"/img/labial1.png",
-"/img/labial2.png",
-"/img/labial3.png"
-]
-
 producto: Producto = {
   nombre: "",
   precio: 0,
-  idProducto: 0
+  idProducto: 0,
+  img: ""
 }
 
 
@@ -42,11 +37,10 @@ constructor(
 ){}
 
 ngOnInit(): void{
-const id = Number(this.route.snapshot.paramMap.get('id'));
+const id = Number(this.route.snapshot.paramMap.get("id"));
 
   this.servicio.obtenerPorID(id).subscribe(datos=>{
     this.producto = datos;
-
   })
   }
 
@@ -54,12 +48,25 @@ const id = Number(this.route.snapshot.paramMap.get('id'));
     agregarCarrito(producto: Producto){
   
     if(this.auth.logueado()){
-      
+      const idUsuario = this.auth.getUsuarioId()!;
 
-      this.carrito.agregarProductoCarrito(producto, 1)
+      if(idUsuario === null){
+        this.router.navigate(["inicio-sesion"]);
+      }
+
+     
+      this.carrito.mostrarCarrito(idUsuario).subscribe(
+        carrito=>{
+          const productoExistente = carrito.productos.find(pc => pc.producto?.idProducto === producto.idProducto)
+          const cantidadFinal = productoExistente ? productoExistente.cantidad + 1 : 1
+       
+        this.carrito.agregarProductoCarrito(producto, cantidadFinal)
       .subscribe(() => {
         this.router.navigate(["carrito"]);
       });
+
+        });
+
     }else{
       this.router.navigate(["inicio-sesion"]);
     }
@@ -67,19 +74,7 @@ const id = Number(this.route.snapshot.paramMap.get('id'));
 
 }
 
-/*
-alertaProducto(){
-  const toastTrigger = document.getElementById('botonAgregarCarrito')
-  const toastProducto = document.getElementById('toastProducto')
 
-
-  if(toastTrigger){
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastProducto)
-    toastTrigger.addEventListener('click', () => {
-      toastBootstrap.show();
-    })
-  }
-}*/
 
 }
 

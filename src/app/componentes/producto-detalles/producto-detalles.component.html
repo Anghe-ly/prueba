@@ -4,25 +4,11 @@
     <!-- Columna izquierda-->
     <div class="col-md-4 text-center">
 
-      <div id="carruselProducto" class="carousel slide" data-bs-ride="carousel">
-
-        <div class="carousel-inner">
-          @for (img of imagenesProducto; track $index) {
-            <div class="carousel-item" [class.active]= "$index === 0">
-              <img [src]="img" class="d-block w-100" alt="Imagen del producto">
-            </div>
-          }
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carruselProducto" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carruselProducto" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
-
+    
+      <div class="imagenProducto">
+       <img [src]="producto.img" alt="" class="img-fluid">
       </div>
+
 
     </div>
 
@@ -36,7 +22,7 @@
 
       <p class="mt-3">
 
-        Todos nuestros productos se componen de foórmulas probadas dermatológicamente y son cruelty free y veganas. 
+        Todos nuestros productos se componen de fórmulas probadas dermatológicamente y son cruelty free y veganas. 
         Elaborados con ingredientes 100% naturales.
       </p>
 

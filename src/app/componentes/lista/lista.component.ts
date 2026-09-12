@@ -63,9 +63,10 @@ export class ListaComponent implements OnInit {
   agregarCarrito(producto: Producto){
   
     if(this.authService.logueado()){
-      const idUsuario = this.authService.getUsuarioId()
+      const idUsuario = this.authService.getUsuarioId()!;
+      
       if(idUsuario === null){
-        return;
+        this.router.navigate(["inicio-sesion"]);
       }
 
       this.servicioCarrito.mostrarCarrito(idUsuario).subscribe( carrito=>{
